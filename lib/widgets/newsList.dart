@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:worldnews/viewmodels/newsArticleViewmodel.dart';
+import 'package:worldnews/screens/newsArticleDetailScreen.dart';
 
 class NewsList extends StatelessWidget {
   final List<NewsArticleViewModel> articles;
-  NewsList({this.articles});
+  final Function(NewsArticleViewModel article) onSelected;
+
+  NewsList({this.articles, this.onSelected});
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -13,6 +17,9 @@ class NewsList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 5.0),
             child: ListTile(
+              onTap: () {
+                this.onSelected(article);
+              },
               leading: Container(
                 height: 100.0,
                 width: 100.0,
